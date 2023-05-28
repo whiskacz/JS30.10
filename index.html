@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: rgb(36, 114, 204);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+        .inbox{
+            border: 2px solid black;
+            width: 20vw;
+            text-align: center;
+            margin: 5vh auto;
+            background-color: rgba(0,0,0,0.1);
+            box-shadow: 0px 0px 5px; 
+        }
+        .item{
+            display: flex;
+            flex: 2;
+        }
+        input{
+            margin: 20px;  
+        }
+        .inbox p{
+            margin: 20px;
+            text-align: left;
+            transition: .3s;
+        }
+        input:checked + p{
+            text-decoration: line-through;
+            color: white;
+            
+        }
+    </style>
+</head>
+<body>
+   <div class="inbox">
+    <div class="item">
+        <input type="checkbox">
+        <p>first</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>second</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>third</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>fourth</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>fifth</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>sixth</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>seventh</p>
+    </div>
+      <div class="item">
+        <input type="checkbox">
+        <p>eighth</p>
+    </div>
+   </div>
+    <script>
+        const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+       let lastChecked;
+
+        function handleChange (e) {
+            let inBetween = false;
+            if(e.shiftKey && this.checked){
+                checkboxes.forEach(checkbox => {
+                    if(checkbox === this || checkbox === lastChecked){
+                        inBetween = !inBetween;
+                        console.log("signal")
+                    }
+                    if(inBetween){
+                        checkbox.checked = true
+                    }
+                })
+            }
+            lastChecked = this
+        }
+
+       
+        checkboxes.forEach(checkbox => { checkbox.addEventListener('click', handleChange)})
+
+
+    </script>
+</body>
+</html>
